@@ -1,0 +1,183 @@
+<div class="container-fluid" style="margin-top: 80px;">
+ 
+  
+  <div class="row">
+    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+      <div class="panel panel-danger">
+        <div class="panel-heading clearfix">
+          <div class="pull-left">
+            Tasks
+          </div>
+          <div class="pull-right">
+            <button class="btn-transparent" data-toggle="collapse" data-target="#search_task_form" >
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+            <button class="btn-transparent" data-toggle="collapse" data-target="#create_task_form" >
+              <span class="glyphicon glyphicon-plus-sign"></span>
+            </button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="create_task_form" class="collapse" style="margin-bottom: 15px;">
+            <%= form_for(@task, url: create_task_path, remote: true ) do |f| %>
+              <div class="form-group">
+                <%= f.text_field :title, autocomplete: :off, class: 'form-control create_task_field', placeholder: 'What do you need to get done?' %>
+              </div>
+              <div class="form-group">
+                <%= f.text_area :description, class: 'form-control create_task_field', placeholder: 'Note yourself.' %>
+              </div>
+              <div class="form-group">
+                <div class="input-group date datetimepicker">
+                  <%= f.datetime_field :deadline_on, class: 'form-control create_task_field', placeholder: 'When\'s the deadline?' %>
+                  <span class="input-group-addon" style="border-radius: 0px; border: none;">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+                </div>
+                <span id="helpBlock2" class="help-block" style="color: red;">Date can't be in the past.</span>
+              </div>
+              <div class="actions">
+                <%= f.submit 'Create Task', class: 'btn btn-default', style: 'width: 100%;'%>
+              </div>
+            <% end %>
+          </div>
+          <div id="search_task_form" class="collapse" style="margin-bottom: 15px;">
+            <%= form_tag(search_task_path, method: :get, remote: true) do %>
+              <div class="input-group">
+                <%= text_field_tag :search, nil, class: 'form-control', placeholder: 'Search for tasks...', autocomplete: :off %>
+                <span class="input-group-addon" style="border-radius: 0px; border: none;">
+                  <button type="submit" class="btn-transparent"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+              </div>
+            <% end %>
+          </div>
+          <div id="task">
+            <%= render @task %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+      <div class="panel panel-warning">
+        <div class="panel-heading clearfix">
+          <div class="pull-left">
+            Schedule
+          </div>
+          <div class="pull-right">
+            <button class="btn-transparent" data-toggle="collapse" data-target="#search_schedule_form" >
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+            <button class="btn-transparent" data-toggle="collapse" data-target="#create_schedule_form" >
+              <span class="glyphicon glyphicon-plus-sign"></span>
+            </button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="create_schedule_form" class="collapse">
+            <%= form_for(@schedule, url: schedules_path, remote: true ) do |f| %>
+              <div class="form-group">
+                <%= f.text_field :title, class: 'form-control create_schedule_field', placeholder: 'What\'s your schedule?', style: 'width: 100%;', autocomplete: :off %>
+              </div>
+              <div class="form-group">
+                <div class="input-group date datetimepicker">
+                  <%= f.datetime_field :schedule_on, class: 'form-control create_schedule_field', placeholder: 'When\'s your schedule?' %>
+                  <span class="input-group-addon" style="border-radius: 0px; border: none;">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+                </div>
+                <span id="helpBlock2" class="help-block" style="color: red;">Date can't be in the past.</span>
+              </div>
+              <div class="actions">
+                <%= f.submit 'Create Schedule', class: 'btn btn-default', style: 'width: 100%;'%>
+              </div>
+            <% end %>
+          </div>
+          <div id="search_schedule_form" class="collapse" style="margin-bottom: 15px;">
+            <%= form_tag(search_schedule_path, method: :get, remote: true) do %>
+              <div class="input-group">
+                <%= text_field_tag :search, nil, class: 'form-control', placeholder: 'Search for schedule...', autocomplete: :off %>
+                <span class="input-group-addon" style="border-radius: 0px; border: none;">
+                  <button type="submit" class="btn-transparent"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+              </div>
+            <% end %>
+          </div>
+          <div id="schedule">
+            <%= render @schedule %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading clearfix">
+          <div class="pull-left">
+            Reminders
+          </div>
+          <div class="pull-right">
+            <button class="btn-transparent" data-toggle="collapse" data-target="#search_reminder_form" >
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+            <button class="btn-transparent" data-toggle="collapse" data-target="#create_reminder_form" >
+              <span class="glyphicon glyphicon-plus-sign"></span>
+            </button>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div id="create_reminder_form" class="collapse">
+            <%= form_for(@reminder, url: reminders_path, remote: true) do |f| %>
+            <div class="form-group">
+              <%= f.text_area :title, class: 'form-control', placeholder: 'Remind yourself with...', style: 'width: 100%;', id: 'create_reminder_field'%>
+            </div>
+            <div class="actions">
+              <%= f.submit 'Create Reminder', class: 'btn btn-default', style: 'width: 100%;'%>
+            </div>
+            <% end %>
+          </div>
+          <div id="search_reminder_form" class="collapse" style="margin-bottom: 15px;">
+            <%= form_tag(search_reminder_path, method: :get, remote: true) do %>
+              <div class="input-group">
+                <%= text_field_tag :search, nil, class: 'form-control', placeholder: 'Search a reminder...', autocomplete: :off %>
+                <span class="input-group-addon" style="border-radius: 0px; border: none;">
+                  <button type="submit" class="btn-transparent"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+              </div>
+            <% end %>
+          </div>
+          <div id="reminder">
+            <%= render @reminder %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+  
+  
+  
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit/Update Task</h4>
+      </div>
+      <div class="modal-body renderer">
+        ...
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-md" role="document">
+    <div id="show-modal" class="modal-content">
+      ...
+    </div>
+  </div>
+</div>
+
+
+
+

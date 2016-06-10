@@ -1,0 +1,44 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title" id="myModalLabel">Edit Schedule</h4>
+</div>
+<div class="modal-body">
+  <%= form_for(@schedule, remote: true) do |f| %>
+    <div class="form">
+      <% if @schedule.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@schedule.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+          <ul>
+            <% @schedule.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :title %><br>
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :schedule_on %>
+        <div class="input-group date datetimepicker">
+          <%= f.text_field :schedule_on, class: 'form-control' %>
+          <span class="input-group-addon" style="border-radius: 0px; border: none;">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+        <span id="helpBlock2" class="help-block" style="color: red;">Date can't be in the past.</span>
+      </div>
+      <div class="actions">
+        <%= f.submit "#{@type}", class: 'btn btn-primary', style: 'width: 100%;' %>
+      </div>
+    </div>
+
+  <% end %>
+</div>
+
+
+
+

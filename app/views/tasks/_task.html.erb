@@ -1,0 +1,116 @@
+          <div style="border-bottom: 2px solid #ec7878;">
+            Tasks due this week
+          </div>
+          <div class="due_tasks_week">
+            <% unless @user_tasks_due_this_week.empty? %>
+              <div class="row">
+                <% @user_tasks_due_this_week.each do |task| %>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="font-size: 12px; padding-top: 10px; padding-bottom: 10px;">
+                    <div class="row">
+                      <div class="col-md-10 col-sm-10 col-lg-10 col-xs-10">
+                        <p><%= link_to task.title, task_path(task), remote: true, data: { toggle: 'modal', target: '#myModal2' } %></p>
+                        
+                        <p style="<%= (task.deadline_on < Time.now ? 'color: red; font-weight: bold;' : '') %>"><span style="margin-right: 5px; " class="glyphicon glyphicon-time"></span>
+                          <%= (task.deadline_on < Time.now ? 'Already past due deadline by'.html_safe : '') %>
+                          <%= distance_of_time_in_words_to_now(task.deadline_on) %></p>
+                      </div>
+                      <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
+                        <div class="pull-right">
+                          <div class="dropdown">
+                            <button class="btn btn-default ok-button transpa" style="font-size: 10px; padding: 0px; height: 10px; margin-bottom: 5px;" type="button" data-toggle="dropdown">
+                              <i class="glyphicon glyphicon-chevron-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-right">
+                              <li><%= link_to 'Mark As Done', task_path(task.id, task: { status: 'done', finished_on: Date.today }), method: :put, remote: true %></li>
+                              <li><%= link_to 'Edit Task', edit_task_path(task), remote: true, data: { toggle: 'modal', target: '#myModal'} %></li>
+                              <li><%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <div style="margin-top: 10px; margin-bottom: 10px;">No tasks due this week.</div>
+            <% end %>
+          </div>
+          <div style="border-bottom: 2px solid #ffa945;">
+            Other tasks
+          </div>
+          <div class="due_tasks_not_this_week">
+            <% unless @user_tasks_due_not_this_week.empty?%>
+              <div class="row">
+                <% @user_tasks_due_not_this_week.each do |task| %>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="font-size: 12px; padding-top: 10px; padding-bottom: 10px;">
+                    <div class="row">
+                      <div class="col-md-10 col-sm-10 col-lg-10 col-xs-10">
+                        <p><%= link_to task.title, task_path(task), remote: true, data: { toggle: 'modal', target: '#myModal2' } %></p>
+                        <p><span style="margin-right: 5px;" class="glyphicon glyphicon-time"></span>
+                          <%= distance_of_time_in_words(Time.now, task.deadline_on) %></p>
+                      </div>
+                      <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
+                        <div class="pull-right">
+                          <div class="dropdown">
+                            <button class="btn btn-default ok-button transpa" style="font-size: 10px; padding: 0px; height: 10px; margin-bottom: 5px;" type="button" data-toggle="dropdown">
+                              <i class="glyphicon glyphicon-chevron-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-right">
+                              <li><%= link_to 'Mark As Done', task_path(task.id, task: { status: 'done', finished_on: Date.today }), method: :put, remote: true %></li>
+                              <li><%= link_to 'Edit Task', edit_task_path(task), remote: true, data: { toggle: 'modal', target: '#myModal'} %></li>
+                              <li><%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <div style="margin-top: 10px; margin-bottom: 10px;">No tasks yet.</div>
+            <% end %>
+          </div>
+          <div class="clearfix" style="border-bottom: 2px solid #78ec78;">
+            <div class="pull-left">
+              Finished tasks
+            </div>
+            <div class="pull-right">
+              <% unless @user_finished_on_time.empty? %>
+                <%= link_to "<span style='color: gray;' class='glyphicon glyphicon-trash'></span>".html_safe, delete_finished_task_path, data: { toggle: 'tooltip', placement: 'left', confirm: 'Are you sure you want to delete all finished tasks?' }, title: 'Clear Finished Task', method: :delete, remote: true %>
+              <% end %>
+            </div>
+          </div>
+          <div class="finished_tasks">
+            <% unless @user_finished_on_time.empty? %>
+              <div class="row">
+                <% @user_finished_on_time.each do |task| %>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="font-size: 12px; padding-top: 10px; padding-bottom: 10px;">
+                    <div class="row">
+                      <div class="col-md-10 col-sm-10 col-lg-10 col-xs-10">
+                        <p><%= link_to task.title, task_path(task), remote: true, data: { toggle: 'modal', target: '#myModal2' } %></p>
+                        <p><span style="margin-right: 5px;" class="glyphicon glyphicon-time"></span>
+                          <%= task.finished_on.strftime("Finished on %A, %B %-d, %Y") %></p>
+                      </div>
+                      <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
+                        <div class="pull-right">
+                          <div class="dropdown">
+                            <button class="btn btn-default ok-button transpa" style="font-size: 10px; padding: 0px; height: 10px; margin-bottom: 5px;" type="button" data-toggle="dropdown">
+                              <i class="glyphicon glyphicon-chevron-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-right">
+                              <li><%= link_to 'Mark as Undone', task_path(task.id, task: { status: 'ongoing', finished_on: nil }), method: :put, remote: true %></li>
+                              <li><%= link_to 'Delete Task', task_path(task), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <div style="margin-top: 10px;">No finished tasks yet.</div>
+            <% end %>
+          </div>

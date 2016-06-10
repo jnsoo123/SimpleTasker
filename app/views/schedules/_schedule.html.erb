@@ -1,0 +1,141 @@
+<div style="border-bottom: 2px solid #ec7878; margin-bottom: 10px;">
+  Schedule for today
+</div>
+<% unless @user_schedule_for_today.empty? %>
+  <% @user_schedule_for_today.each do |schedule| %>
+    <div class="row" style="font-size: 12px;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="font-size: 12px; padding-top: 5px; padding-bottom: 5px;">
+        <div class="row">
+          <div class="col-md-10 col-sm-10 col-lg-10 col-xs-10">
+            <p><%= schedule.title %></p>
+            <p><%= schedule.schedule_on.strftime("On %A, %B %-d, %Y %l:%M %p") %></p>
+            <p><span style="margin-right: 5px;" class="glyphicon glyphicon-time"></span>
+              <%= distance_of_time_in_words_to_now(schedule.schedule_on) %></p>
+          </div>
+          <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
+            <div class="pull-right">
+              <div class="dropdown">
+                <button class="btn btn-default ok-button transpa" style="font-size: 10px; padding: 0px; height: 10px; margin-bottom: 5px;" type="button" data-toggle="dropdown">
+                  <i class="glyphicon glyphicon-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                  <li><%= link_to 'Edit Schedule', edit_schedule_path(schedule), remote: true, data: { toggle: 'modal', target: '#myModal2'} %></li>
+                  <li><%= link_to 'Delete Schedule', schedule_path(schedule), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  <% end %> 
+<% else %>
+  <div style="padding-top: 5px;">No schedules for today.</div>
+<% end %>
+<div style="border-bottom: 2px solid #ffa945; margin-bottom: 10px; margin-top: 10px;">
+  Schedule for the week
+</div>
+<% unless @user_week_schedule.empty? %>
+  <% @user_week_schedule.each do |schedule| %>
+    <div class="row" style="font-size: 12px;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="font-size: 12px; padding-top: 5px; padding-bottom: 5px;">
+        <div class="row">
+          <div class="col-md-10 col-sm-10 col-lg-10 col-xs-10">
+            <p><%= schedule.title %></p>
+            <p><%= schedule.schedule_on.strftime("On %A, %B %-d, %Y %l:%M %p") %></p>
+            <p><span style="margin-right: 5px;" class="glyphicon glyphicon-time"></span>
+              <%= distance_of_time_in_words_to_now(schedule.schedule_on) %></p>
+          </div>
+          <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
+            <div class="pull-right">
+              <div class="dropdown">
+                <button class="btn btn-default ok-button transpa" style="font-size: 10px; padding: 0px; height: 10px; margin-bottom: 5px;" type="button" data-toggle="dropdown">
+                  <i class="glyphicon glyphicon-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                  <li><%= link_to 'Edit Schedule', edit_schedule_path(schedule), remote: true, data: { toggle: 'modal', target: '#myModal2'} %></li>
+                  <li><%= link_to 'Delete Schedule', schedule_path(schedule), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  <% end %> 
+<% else %>
+  <div style="padding-top: 5px;">No schedules for the week.</div>
+<% end %>
+<div style="border-bottom: 2px solid #428bca; margin-bottom: 10px; margin-top: 10px;">
+  Schedule for the following weeks
+</div>
+<% unless @user_incoming_schedule.empty? %>
+  <% @user_incoming_schedule.each do |schedule| %>
+    <div class="row" style="font-size: 12px;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="font-size: 12px; padding-top: 5px; padding-bottom: 5px;">
+        <div class="row">
+          <div class="col-md-10 col-sm-10 col-lg-10 col-xs-10">
+            <p><%= schedule.title %></p>
+            <p><%= schedule.schedule_on.strftime("On %A, %B %-d, %Y %l:%M %p") %></p>
+            <p><span style="margin-right: 5px;" class="glyphicon glyphicon-time"></span>
+              <%= distance_of_time_in_words_to_now(schedule.schedule_on) %></p>
+          </div>
+          <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
+            <div class="pull-right">
+              <div class="dropdown">
+                <button class="btn btn-default ok-button transpa" style="font-size: 10px; padding: 0px; height: 10px; margin-bottom: 5px;" type="button" data-toggle="dropdown">
+                  <i class="glyphicon glyphicon-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                  <li><%= link_to 'Edit Schedule', edit_schedule_path(schedule), remote: true, data: { toggle: 'modal', target: '#myModal2'} %></li>
+                  <li><%= link_to 'Delete Schedule', schedule_path(schedule), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  <% end %> 
+<% else %>
+  <div style="padding-top: 5px;">No schedules.</div>
+<% end %>
+<div class="clearfix" style="border-bottom: 2px solid #78ec78; margin-bottom: 10px; margin-top: 10px;">
+  <div class="pull-left">
+    Past schedules
+  </div>
+  <div class="pull-right">
+    <% unless @user_past_schedule.empty? %>
+      <%= link_to "<span style='color: gray;' class='glyphicon glyphicon-trash'></span>".html_safe, delete_past_schedule_path, data: { toggle: 'tooltip',   placement: 'left', confirm: 'Are you sure you want to delete all finished tasks?' }, title: 'Clear Past Schedules', method: :delete, remote: true %>
+    <% end %>
+  </div>
+</div>
+<% unless @user_past_schedule.empty? %>
+  <% @user_past_schedule.each do |schedule| %>
+    <div class="row" style="font-size: 12px;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="font-size: 12px; padding-top: 5px; padding-bottom: 5px;">
+        <div class="row">
+          <div class="col-md-10 col-sm-10 col-lg-10 col-xs-10">
+            <p><%= schedule.title %></p>
+            <p><%= schedule.schedule_on.strftime("On %A, %B %-d, %Y %l:%M %p") %></p>
+          </div>
+          <div class="col-md-2 col-sm-2 col-lg-2 col-xs-2">
+            <div class="pull-right">
+              <div class="dropdown">
+                <button class="btn btn-default ok-button transpa" style="font-size: 10px; padding: 0px; height: 10px; margin-bottom: 5px;" type="button" data-toggle="dropdown">
+                  <i class="glyphicon glyphicon-chevron-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                  <li><%= link_to 'Edit Schedule', edit_schedule_path(schedule), remote: true, data: { toggle: 'modal', target: '#myModal2'} %></li>
+                  <li><%= link_to 'Delete Schedule', schedule_path(schedule), method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  <% end %> 
+<% else %>
+  <div style="padding-top: 5px;">No past schedules.</div>
+<% end %>

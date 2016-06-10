@@ -1,0 +1,21 @@
+.container.default {
+  margin-top: 80px;
+  padding: 0;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  .form{
+    background-color: #fff;
+    padding: 50px 50px 50px 50px;
+    .btn {
+      margin-top: 10px;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (min-width: 540px) {
+  
+  .container.default{
+    max-width: 480px;
+  }
+  
+}
