@@ -1,28 +1,38 @@
-== README
+README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+This app does a simple task list, schedule list, and reminder list.
+features:
+  User
+    User login and logout using devise gem
+  The task list
+    CRUD
+    Search feature
+    With color priority based on deadline 
+    Using datetimepicker gem
+    Organized task list with time left
+      based on tasks due on current week
+      based on tasks due on incoming weeks
+      based on finished tasks
+      based on unfinished tasks already due deadline
+  The schedule list
+    CRUD
+    Search feature
+    With color priority based on the schedule
+    Using datetimepicker gem
+    Organized schedule list with date and time left
+      based on the day's schedule
+      based on the week's schedule
+      based on the incoming weeks' schedule
+      based on past schedules
+  The reminder list
+    CRUD
+    Search feature
+    With one click 'mark as done' to update and vise versa
+    easy to read if its done or not
+  
+  Single page app using only AJAX request except the login page
+  
+  Responsive with @media integration and bootstrap
+      
+  
+    
