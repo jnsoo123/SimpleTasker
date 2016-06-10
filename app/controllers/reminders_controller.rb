@@ -1,5 +1,6 @@
 class RemindersController < ApplicationController
   before_action :set_reminder, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_reminder, only: [:create, :update, :destroy]
 
   respond_to :js
 
@@ -23,19 +24,16 @@ class RemindersController < ApplicationController
   def create
     @reminder = Reminder.new(reminder_params)
     @reminder.user = current_user
-    @user_reminders = current_user.reminders
     @reminder.save
     respond_with(@reminder)
   end
 
   def update
     @reminder.update(reminder_params)
-    @user_reminders = current_user.reminders
     respond_with(@reminder)
   end
 
   def destroy
-    @user_reminders = current_user.reminders
     @reminder.destroy
     respond_with(@reminder)
   end
@@ -47,6 +45,11 @@ class RemindersController < ApplicationController
   end
 
   private
+  
+    def set_user_reminder
+      @user_reminders = current_user.reminders
+    end
+  
     def set_reminder
       @reminder = Reminder.find(params[:id])
     end

@@ -1,6 +1,7 @@
 class SchedulesController < ApplicationController
   before_action :set_schedule, only: [:show, :edit, :destroy]
   before_action :set_schedule_update, only: :update
+  before_action :set_user_schedule, only: [:create, :update, :destroy, :destroy_past_schedule]
 
   respond_to :js
 
@@ -22,11 +23,6 @@ class SchedulesController < ApplicationController
   end
 
   def create
-    @user_schedule_for_today = current_user.schedule_for_today
-    @user_week_schedule = current_user.week_schedule
-    @user_incoming_schedule = current_user.incoming_schedule
-    @user_past_schedule = current_user.past_schedule
-    
     @schedule = Schedule.new(schedule_params)
     @schedule.user = current_user
     @schedule.save
@@ -34,32 +30,16 @@ class SchedulesController < ApplicationController
   end
 
   def update
-    @user_schedule_for_today = current_user.schedule_for_today
-    @user_week_schedule = current_user.week_schedule
-    @user_incoming_schedule = current_user.incoming_schedule
-    @user_past_schedule = current_user.past_schedule
-    
-    @user_schedules = current_user.schedules
     @schedule.update(schedule_params)
     respond_with(@schedule)
   end
 
   def destroy
-    @user_schedule_for_today = current_user.schedule_for_today
-    @user_week_schedule = current_user.week_schedule
-    @user_incoming_schedule = current_user.incoming_schedule
-    @user_past_schedule = current_user.past_schedule
-    
-    @user_schedules = current_user.schedules
     @schedule.destroy
     respond_with(@schedule)
   end
   
   def destroy_past_schedule
-    @user_schedule_for_today = current_user.schedule_for_today
-    @user_week_schedule = current_user.week_schedule
-    @user_incoming_schedule = current_user.incoming_schedule
-    @user_past_schedule = current_user.past_schedule
     
     @user_past_schedule.destroy_all
     respond_with(@user_past_schedule)
@@ -72,6 +52,15 @@ class SchedulesController < ApplicationController
   end
 
   private
+  
+    def set_user_schedule
+      @user_schedule_for_today = current_user.schedule_for_today
+      @user_week_schedule = current_user.week_schedule
+      @user_incoming_schedule = current_user.incoming_schedule
+      @user_past_schedule = current_user.past_schedule
+      @user_schedules = current_user.schedules
+    end
+  
     def set_schedule
       @schedule = Schedule.find(params[:id])
       @schedule.schedule_on = @schedule.schedule_on.strftime('%d/%m/%Y %I:%M %p')

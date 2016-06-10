@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :destroy]
   before_action :set_update_task, only: :update
+  before_action :set_user_task, only: [:create, :update, :destroy, :destroy_finished_task]
   respond_to :js
   rescue_from ActiveRecord::RecordInvalid, with: :invalid_task
 
@@ -21,9 +22,6 @@ class TasksController < ApplicationController
   end
 
   def create
-    @user_tasks_due_this_week = current_user.tasks_due_this_week
-    @user_tasks_due_not_this_week = current_user.tasks_not_due_this_week
-    @user_finished_on_time = current_user.tasks_finished_on_time
     @task = Task.new(task_params)
     @task.user = current_user
     if @task.save!
@@ -35,28 +33,17 @@ class TasksController < ApplicationController
   end
 
   def update
-    @user_tasks_due_this_week = current_user.tasks_due_this_week
-    @user_tasks_due_not_this_week = current_user.tasks_not_due_this_week
-    @user_finished_on_time = current_user.tasks_finished_on_time
     @task.update(task_params)
     respond_with(@task, location: home_path)
   end
 
   def destroy
-    @user_tasks_due_this_week = current_user.tasks_due_this_week
-    @user_tasks_due_not_this_week = current_user.tasks_not_due_this_week
-    @user_finished_on_time = current_user.tasks_finished_on_time
     @task.destroy
     flash[:notice] = "Task deleted!"
     respond_with(@task)
   end
   
   def destroy_finished_task
-    @user_tasks_due_this_week = current_user.tasks_due_this_week
-    @user_tasks_due_not_this_week = current_user.tasks_not_due_this_week
-    @user_finished_on_time = current_user.tasks_finished_on_time
-    
-    @user_finished_on_time = current_user.tasks_finished_on_time
     @user_finished_on_time.destroy_all
     respond_with(@user_finished_on_time)
   end
@@ -68,6 +55,12 @@ class TasksController < ApplicationController
   end
 
   private
+  
+    def set_user_task
+      @user_tasks_due_this_week = current_user.tasks_due_this_week
+      @user_tasks_due_not_this_week = current_user.tasks_not_due_this_week
+      @user_finished_on_time = current_user.tasks_finished_on_time
+    end
   
     def set_task
       @task = Task.find(params[:id])
