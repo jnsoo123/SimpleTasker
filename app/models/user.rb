@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   
   def tasks_due_this_week
-    tasks.where(deadline_on: Date.today..1.week.from_now, status: 'ongoing').order('deadline_on')
+    tasks.where("deadline_on < ? and status = ?", 1.week.from_now, 'ongoing').order('deadline_on')
   end
   
   def tasks_not_due_this_week
@@ -21,9 +21,9 @@ class User < ActiveRecord::Base
     tasks.where('status = ?', 'done').order('deadline_on')
   end
   
-  def tasks_not_finished_on_time
-    tasks.where('deadline_on < ? and status = ?', Date.today, 'ongoing').order('deadline_on')
-  end
+#  def tasks_not_finished_on_time
+#    tasks.where('deadline_on < ? and status = ?', Time.now, 'ongoing').order('deadline_on')
+#  end
   
   def week_schedule
     schedules.where(schedule_on: Date.tomorrow..1.week.from_now).order('schedule_on')

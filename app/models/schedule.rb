@@ -7,6 +7,6 @@ class Schedule < ActiveRecord::Base
   private 
   
     def schedule_on_cannot_be_in_the_past
-      errors.add(:schedule_on, "can't be in the past") if !schedule_on.blank? and schedule_on < Date.today
+      errors.add(:schedule_on, "can't be in the past") if !schedule_on.blank? and schedule_on < Time.now
     end
 end

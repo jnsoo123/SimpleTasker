@@ -40,7 +40,6 @@ class SchedulesController < ApplicationController
   end
   
   def destroy_past_schedule
-    
     @user_past_schedule.destroy_all
     respond_with(@user_past_schedule)
   end
