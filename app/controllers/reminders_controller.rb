@@ -23,6 +23,7 @@ class RemindersController < ApplicationController
 
   def create
     @reminder = Reminder.new(reminder_params)
+    @reminder.title = @reminder.title.to_s.gsub(/(\r)?\n/, '<br />')
     @reminder.user = current_user
     @reminder.save
     respond_with(@reminder)
