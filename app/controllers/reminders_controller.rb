@@ -56,6 +56,6 @@ class RemindersController < ApplicationController
     end
 
     def reminder_params
-      params.require(:reminder).permit(:title, :done)
+      params.require(:reminder).permit(:title, :done, :id)
     end
 end

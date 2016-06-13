@@ -8,22 +8,17 @@ $(document).on("ready page:change", function() {
   
   $('.datetimepicker').datetimepicker({format:'DD/MM/Y h:mm A'});
   
-  
-  
-});
-
-$(document).ready(function(){
-  
-  var content = "";
-  
-  $('.edit-reminder-div').click(function(){
-    content = $(this).find('div.html-content').html();
-  });
-  
   $('.edit-reminder-div').blur(function(){
+    var content = "";
+    $('div.html-content').each(function(){
+      content += $(this).html().replace(/(\n)/g,"<br>") + "<br>";
+//      alert(content);
+    });
+    content = content.split('<br>').slice(0,-1).join('<br>');
     var id = $(this).data('id');
-    var changed_content = $(this).find('div.html-content').html().replace(/(\n)+/g,"<br>");
-    update_reminder(id, changed_content);
+//    var changed_content = $(this).find('div.html-content').html();
+//    alert(changed_content);
+    update_reminder(id, content);
   });  
   
   function update_reminder(id, content) {
@@ -36,5 +31,8 @@ $(document).ready(function(){
       data: JSON.stringify(data)
     });
   }
-
+//  alert(1);
+  
 });
+
+

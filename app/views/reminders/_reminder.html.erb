@@ -4,7 +4,7 @@
       <div class="col-md-2 col-sm-2 col-xs-2">
         <%= link_to "<span class='glyphicon glyphicon-ok' style='color: #{ (reminder.done ? "green" : "black") };'></span>".html_safe, reminder_path(reminder.id,  reminder: { done: ( reminder.done ? 'false' : 'true' ) }), method: :put, remote: true %>
       </div>
-      <div class="col-md-8 col-sm-8 col-xs-8 edit-reminder-div" contenteditable="true" data-id="<%= reminder.id %>" data-content="<%= reminder.title %>">
+      <div class="col-md-8 col-sm-8 col-xs-8 edit-reminder-div" style="display: inline-block;" contenteditable="true" data-id="<%= reminder.id %>" data-content="<%= reminder.title %>">
         <span style="color: <%= (reminder.done ? '#a9a9a9' : 'black' ) %>"><%= (reminder.done ? '<s>'.html_safe : '' )%><div class="html-content"><%= reminder.title.html_safe %></div><%= (reminder.done ? '</s>'.html_safe : '' )%></span>
       </div>
       <div class="col-md-2 col-sm-2 col-xs-2">
