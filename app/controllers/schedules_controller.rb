@@ -25,8 +25,22 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new(schedule_params)
     @schedule.user = current_user
-    @schedule.save
-    respond_with(@schedule)
+    
+    if @schedule.save
+      @included_users = Array.new
+      params[:with].split(" ").each { |string_with_at| @included_users << string_with_at.tr('@','') if string_with_at.include?("@") }
+      unless @included_users.empty?
+        @included_users.each do |u|
+          user = User.find_by(username: u)
+          if user
+            @include_user_to_schedule = Schedule.new(schedule_params)
+            @include_user_to_schedule.user = user
+            @include_user_to_schedule.save! 
+          end
+        end
+      end
+      respond_with(@schedule)
+    end
   end
 
   def update
