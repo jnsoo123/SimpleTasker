@@ -1,5 +1,5 @@
 class Schedule < ActiveRecord::Base
-  belongs_to :user
+  has_many :line_schedules, dependent: :destroy
   
   validates :title, presence: true
   validate :schedule_on_cannot_be_in_the_past

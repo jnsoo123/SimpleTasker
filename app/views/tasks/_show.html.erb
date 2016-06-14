@@ -3,7 +3,7 @@
   <h4 class="modal-title" id="myModalLabel"><%= @task.title %></h4>
 </div>
 <div class="modal-body">
-  <%= @task.description %>
+  <%= simple_format(@task.description) %>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

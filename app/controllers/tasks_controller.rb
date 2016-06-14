@@ -25,20 +25,26 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
-    @task.user = current_user
-    
+    @task.description += "\n\nCreated by: #{current_user.name}"
     
     if @task.save!
+      
       @included_users = Array.new
+      @line_task = LineTask.new
+      @line_task.user = current_user
+      @line_task.task = Task.last
+      @line_task.save
+      
       @task.description.split(" ").each { |string_with_at| @included_users << string_with_at.tr('@','') if string_with_at.include?("@") }
 
       unless @included_users.empty?
         @included_users.each do |u|
           user = User.find_by(username: u)
           if user
-            @include_user_to_task = Task.new(task_params)
+            @include_user_to_task = LineTask.new
             @include_user_to_task.user = user
-            @include_user_to_task.save! 
+            @include_user_to_task.task = Task.last
+            @include_user_to_task.save
           end
         end
       end

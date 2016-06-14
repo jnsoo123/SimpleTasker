@@ -11,7 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160614024040) do
+ActiveRecord::Schema.define(version: 20160614062534) do
+
+  create_table "line_schedules", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "schedule_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "line_schedules", ["schedule_id"], name: "index_line_schedules_on_schedule_id"
+  add_index "line_schedules", ["user_id"], name: "index_line_schedules_on_user_id"
+
+  create_table "line_tasks", force: true do |t|
+    t.integer  "task_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "line_tasks", ["task_id"], name: "index_line_tasks_on_task_id"
+  add_index "line_tasks", ["user_id"], name: "index_line_tasks_on_user_id"
 
   create_table "reminders", force: true do |t|
     t.text     "title",      limit: 255
@@ -26,25 +46,19 @@ ActiveRecord::Schema.define(version: 20160614024040) do
   create_table "schedules", force: true do |t|
     t.string   "title"
     t.datetime "schedule_on"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "schedules", ["user_id"], name: "index_schedules_on_user_id"
-
   create_table "tasks", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status",      default: "ongoing"
     t.datetime "deadline_on"
     t.date     "finished_on"
   end
-
-  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

@@ -1,6 +1,5 @@
 class Task < ActiveRecord::Base
-  belongs_to :user
-  
+  has_many :line_tasks, dependent: :destroy
   validates :title, presence: true
   validates :deadline_on, presence: true
   
