@@ -12,14 +12,30 @@ $(document).on("ready page:change", function() {
     var content = "";
     $('div.html-content').each(function(){
       content += $(this).html().replace(/(\n)/g,"<br>") + "<br>";
-//      alert(content);
     });
     content = content.split('<br>').slice(0,-1).join('<br>');
     var id = $(this).data('id');
-//    var changed_content = $(this).find('div.html-content').html();
-//    alert(changed_content);
     update_reminder(id, content);
   });  
+  
+  
+  $.ajax({url: "/users/get_users", success: function(result){
+    $('textarea').atwho({
+      at: '@', 
+      displayTpl: "<li>@${username} <span style='font-weight: bold;'>${name}</span></li>",
+      insertTpl: "${atwho-at}${username}",
+      data: result
+    });
+  }});
+  
+  
+  
+  
+  //----------FUNCTIONS-------------
+  
+  
+  
+  
   
   function update_reminder(id, content) {
     var data = { id: id, title: content };
@@ -31,7 +47,6 @@ $(document).on("ready page:change", function() {
       data: JSON.stringify(data)
     });
   }
-//  alert(1);
   
 });
 

@@ -2,7 +2,9 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :destroy]
   before_action :set_update_task, only: :update
   before_action :set_user_task, only: [:create, :update, :destroy, :destroy_finished_task]
+  
   respond_to :js
+  
   rescue_from ActiveRecord::RecordInvalid, with: :invalid_task
 
   def index
@@ -24,8 +26,22 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.user = current_user
+    
+    
     if @task.save!
-      flash[:notice] = "Task created!"
+      @included_users = Array.new
+      @task.description.split(" ").each { |string_with_at| @included_users << string_with_at.tr('@','') if string_with_at.include?("@") }
+
+      unless @included_users.empty?
+        @included_users.each do |u|
+          user = User.find_by(username: u)
+          if user
+            @include_user_to_task = Task.new(task_params)
+            @include_user_to_task.user = user
+            @include_user_to_task.save! 
+          end
+        end
+      end
       respond_with @task
     else
       respond_with @task

@@ -1,2 +1,10 @@
 class UserController < ApplicationController
+  respond_to :json
+  
+  def get_users
+    @all_users = User.all
+    respond_with(@all_users) do |format|
+      format.json { render partial: "users/users.json" }
+    end
+  end
 end

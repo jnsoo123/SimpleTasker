@@ -8,7 +8,6 @@ class HomeController < ApplicationController
     
     @user_tasks = current_user.tasks.order('deadline_on')
     @user_tasks_due_this_week = current_user.tasks_due_this_week
-#    @user_tasks_due_this_week.push(current_user.tasks_not_finished_on_time) unless current_user.tasks_not_finished_on_time.empty?
     @user_tasks_due_not_this_week = current_user.tasks_not_due_this_week
     @user_finished_on_time = current_user.tasks_finished_on_time
     
@@ -16,5 +15,7 @@ class HomeController < ApplicationController
     @user_week_schedule = current_user.week_schedule
     @user_incoming_schedule = current_user.incoming_schedule
     @user_past_schedule = current_user.past_schedule
+    
+    
   end
 end

@@ -5,7 +5,6 @@ Hackathon::Application.routes.draw do
 
   resources :tasks
 
-  get "user/index"
   devise_for :users
   get "home/index"
   
@@ -20,6 +19,8 @@ Hackathon::Application.routes.draw do
   get '/task/search' => 'tasks#search', as: :search_task
   get '/schedule/search' => 'schedules#search', as: :search_schedule
   get '/reminder/search' => 'reminders#search', as: :search_reminder
+  
+  get '/users/get_users' => 'user#get_users'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
