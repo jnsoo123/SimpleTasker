@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    
     @task = Task.new
     @reminder = Reminder.new
     @schedule = Schedule.new
