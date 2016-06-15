@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   
   validates :name, presence: true
+  validates :username, uniqueness: true
   
   
   def tasks_due_this_week

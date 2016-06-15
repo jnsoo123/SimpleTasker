@@ -36,8 +36,9 @@ class SchedulesController < ApplicationController
       params[:with].split(" ").each { |string_with_at| @included_users << string_with_at.tr('@','') if string_with_at.include?("@") }
       
       unless @included_users.empty?
+        user_list = User.where.not(id: current_user.id)
         @included_users.each do |u|
-          user = User.find_by(username: u)
+          user = user_list.find_by(username: u)
           if user
             @include_user_to_schedule = LineSchedule.new
             @include_user_to_schedule.user = user
