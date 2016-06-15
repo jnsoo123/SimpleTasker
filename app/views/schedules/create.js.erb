@@ -1,3 +1,31 @@
-$('.create_schedule_field').val('')
-$('#create_schedule_form').collapse('hide')
-$('#schedule').html("<%= escape_javascript render(@schedule)%>")
+<% unless @schedule.errors.any? %>
+  $('.create_schedule_field').val('')
+  $('#create_schedule_form').collapse('hide')
+  $('#schedule').html("<%= escape_javascript render(@schedule)%>")
+  $('#schedule_alert_area').html("<div class='alert alert-success'>Schedule Created!</div>")
+  $('#schedule_title').parent().find('span.help-block').remove()
+  $('#schedule_title').parent().removeClass('has-error')
+  $('#schedule_schedule_on').parent().parent().find('span.help-block').remove()
+  $('#schedule_schedule_on').parent().parent().removeClass('has-error')
+  setTimeout((function() {
+    $('#schedule_alert_area').hide('blind', {}, 50);
+  }), 3000);
+<% else %>
+  <% unless @schedule.errors[:title].empty? %>
+    $('#schedule_title').parent().addClass('has-error')
+    $('#schedule_title').parent().find('span.help-block').remove()
+    $('#schedule_title').parent().append("<span class='help-block'>Title cannot be blank.</span>")
+  <% else %>
+    $('#schedule_title').parent().find('span.help-block').remove()
+    $('#schedule_title').parent().removeClass('has-error')
+  <% end %>
+  <% unless @schedule.errors[:schedule_on].empty? %>
+    $('#schedule_schedule_on').parent().parent().addClass('has-error')
+    $('#schedule_schedule_on').parent().parent().find('span.help-block').remove()
+    $('#schedule_schedule_on').parent().parent().append("<span class='help-block'>Date cannot be in the past.</span>")
+  <% else %>
+    $('#schedule_schedule_on').parent().parent().find('span.help-block').remove()
+    $('#schedule_schedule_on').parent().parent().removeClass('has-error')
+  <% end %>
+<% end %>
+

@@ -1,3 +1,31 @@
-$('.create_task_field').val('')
-$('#create_task_form').collapse('hide')
-$('#task').html("<%= escape_javascript render(@task)%>")
+<% unless @task.errors.any? %>
+  $('.create_task_field').val('')
+  $('#create_task_form').collapse('hide')
+  $('#task').html("<%= escape_javascript render(@task)%>")
+  $('#task_alert_area').html("<div class='alert alert-success'>Task Created!</div>")
+  $('#task_title').parent().find('span.help-block').remove()
+  $('#task_title').parent().removeClass('has-error')
+  $('#task_deadline_on').parent().parent().find('span.help-block').remove()
+  $('#task_deadline_on').parent().parent().removeClass('has-error')
+  setTimeout((function() {
+    $('#task_alert_area').hide('blind', {}, 50);
+  }), 3000);
+<% else %>
+  <% unless @task.errors[:title].empty? %>
+    $('#task_title').parent().addClass('has-error')
+    $('#task_title').parent().find('span.help-block').remove()
+    $('#task_title').parent().append("<span class='help-block'>Title cannot be blank.</span>")
+  <% else %>
+    $('#task_title').parent().find('span.help-block').remove()
+    $('#task_title').parent().removeClass('has-error')
+  <% end %>
+  <% unless @task.errors[:deadline_on].empty? %>
+    $('#task_deadline_on').parent().parent().addClass('has-error')
+    $('#task_deadline_on').parent().parent().find('span.help-block').remove()
+    $('#task_deadline_on').parent().parent().append("<span class='help-block'>Date cannot be in the past.</span>")
+  <% else %>
+    $('#task_deadline_on').parent().parent().find('span.help-block').remove()
+    $('#task_deadline_on').parent().parent().removeClass('has-error')
+  <% end %>
+<% end %>
+  

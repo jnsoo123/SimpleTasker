@@ -1,2 +1,6 @@
 $("#myModal2").modal('hide')
 $('#schedule').html("<%= escape_javascript render(@schedule)%>")
+$('#schedule_alert_area').html("<div class='alert alert-warning'>Schedule Updated!</div>")
+setTimeout((function() {
+  $('#schedule_alert_area').hide('blind', {}, 50);
+}), 3000);

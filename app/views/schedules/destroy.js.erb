@@ -1,1 +1,5 @@
 $('#schedule').html("<%= escape_javascript render(@schedule)%>")
+$('#schedule_alert_area').html("<div class='alert alert-warning'>Schedule Deleted!</div>")
+setTimeout((function() {
+  $('#schedule_alert_area').hide('blind', {}, 50);
+}), 3000);

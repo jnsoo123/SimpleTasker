@@ -27,7 +27,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.description += "\n\nCreated by: #{current_user.name}"
     
-    if @task.save!
+    if @task.save
       
       @included_users = Array.new
       @line_task = LineTask.new

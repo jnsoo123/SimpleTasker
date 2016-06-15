@@ -1,8 +1,10 @@
 class Schedule < ActiveRecord::Base
   has_many :line_schedules, dependent: :destroy
+  has_many :users, through: :line_schedules
   
   validates :title, presence: true
-  validate :schedule_on_cannot_be_in_the_past
+  validates :schedule_on, presence: true
+  validate :schedule_on_cannot_be_in_the_past, on: :create
   
   private 
   

@@ -1,2 +1,6 @@
 $('#myModal').modal('hide')
 $('#task').html("<%= escape_javascript render(@task)%>")
+$('#task_alert_area').html("<div class='alert alert-info'>Task edited!</div>")
+setTimeout((function() {
+  $('#task_alert_area').hide('blind', {}, 50);
+}), 3000);
