@@ -12,7 +12,7 @@ $(document).on("ready page:change", function() {
   
   $('.edit-reminder-div').blur(function(){
     var content = "";
-    $('div.html-content').each(function(){
+    $(this).find('div.html-content').each(function(){
       content += $(this).html().replace(/(\n)/g,"<br>") + "<br>";
     });
     content = content.split('<br>').slice(0,-1).join('<br>');
