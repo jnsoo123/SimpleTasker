@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20160614062534) do
 
-  create_table "line_schedules", force: true do |t|
+  create_table "line_schedules", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "schedule_id"
     t.datetime "created_at"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20160614062534) do
   add_index "line_schedules", ["schedule_id"], name: "index_line_schedules_on_schedule_id"
   add_index "line_schedules", ["user_id"], name: "index_line_schedules_on_user_id"
 
-  create_table "line_tasks", force: true do |t|
+  create_table "line_tasks", force: :cascade do |t|
     t.integer  "task_id"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20160614062534) do
   add_index "line_tasks", ["task_id"], name: "index_line_tasks_on_task_id"
   add_index "line_tasks", ["user_id"], name: "index_line_tasks_on_user_id"
 
-  create_table "reminders", force: true do |t|
+  create_table "reminders", force: :cascade do |t|
     t.text     "title",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -43,14 +43,14 @@ ActiveRecord::Schema.define(version: 20160614062534) do
 
   add_index "reminders", ["user_id"], name: "index_reminders_on_user_id"
 
-  create_table "schedules", force: true do |t|
+  create_table "schedules", force: :cascade do |t|
     t.string   "title"
     t.datetime "schedule_on"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tasks", force: true do |t|
+  create_table "tasks", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.datetime "created_at"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20160614062534) do
     t.date     "finished_on"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

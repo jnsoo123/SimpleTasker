@@ -1,6 +1,6 @@
 
 <div class="container default" style="margin-top: 75px; margin-bottom: 40px;">
-    <div style="width: 100%; background-color: #FFB732; height: 75px; margin-top: 0px;">
+    <div style="width: 100%; background-color: #333; height: 75px; margin-top: 0px;">
       <p class="text-center" style="padding-top: 25px; color: #fff; font-size: 18px;">Edit Account Information</p>
     </div>
     <div class="form">
@@ -34,7 +34,7 @@
         <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: 'IMPORTANT!' %>
       </div>
       <div class="actions">
-        <%= f.submit "Update Account Information", class: 'btn btn-primary', style: 'width: 100%;' %>
+        <%= f.submit "Update Account Information", class: 'btn btn-default', style: 'width: 100%;' %>
       </div>
       <% end %>
       <h3>Cancel my account</h3>

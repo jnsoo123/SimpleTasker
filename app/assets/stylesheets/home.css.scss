@@ -1,5 +1,5 @@
 body { 
-  font-family: 'Exo';
+  
 }
 
 #login-window {
@@ -41,9 +41,9 @@ body {
   margin-bottom: 10px;
 }
 
-.navbar-border-color {
-  border-bottom: 2px solid #FFA500;
-}
+// .navbar-border-color {
+//   border-bottom: 2px solid #FFA500;
+// }
 
 li.active a { 
   border-bottom: 3px solid #FFA500;
@@ -134,19 +134,19 @@ a:hover{
   }
 }
 
-.btn:focus {
-  outline: none;
-}
+// .btn:focus {
+//   outline: none;
+// }
 
-.btn.btn-primary{
-  background-color: #FFB732;
-  border-color: #FFB732;
-}
+// .btn.btn-primary{
+//   background-color: #FFB732;
+//   border-color: #FFB732;
+// }
 
-.btn.btn-primary:hover{
-  background-color: #FFA500;
-  border-color: #FFA500;
-}
+// .btn.btn-primary:hover{
+//   background-color: #FFA500;
+//   border-color: #FFA500;
+// }
 
 .btn.btn-success {
   color: #fff;
@@ -173,30 +173,30 @@ a:hover{
   width: 200px;
 }
 
-.panel{
-  border-radius: 0px;
-  border: none;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
+// .panel{
+//   border-radius: 0px;
+//   border: none;
+//   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+// }
 
-.panel-danger > .panel-heading {
-  background-color: #ec7878;
-  border-radius: 0px;
-  color: #fff;
-}
+// .panel-danger > .panel-heading {
+//   background-color: #ec7878;
+//   border-radius: 0px;
+//   color: #fff;
+// }
 
-.panel-warning > .panel-heading {
-  background-color: #ffa945;
-  border-radius: 0px;
-  color: #fff;
-}
+// .panel-warning > .panel-heading {
+//   background-color: #ffa945;
+//   border-radius: 0px;
+//   color: #fff;
+// }
 
-.panel-primary > .panel-heading{
-  background-color: #6aaae1;
-  border-bottom: none;
-  border-radius: 0px;
-  color: #fff;
-}
+// .panel-primary > .panel-heading{
+//   background-color: #6aaae1;
+//   border-bottom: none;
+//   border-radius: 0px;
+//   color: #fff;
+// }
 
 .panel-default > .panel-heading {
   border-radius: 0px;
@@ -247,7 +247,7 @@ button.btn-transparent {
 }
 
 .modal-backdrop {
-   background-color: #6b6b6b;
+  background-color: #6b6b6b;
 }
 
 .edit-reminder-div {
