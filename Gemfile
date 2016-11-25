@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-#gem 'rails', '4.0.0'
-gem 'rails'
+# gem 'rails', '4.0.0'
+gem 'rails', '4.2.6'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'
@@ -48,9 +48,9 @@ gem 'heroku'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.0.0'
-gem 'chromedriver-helper'
 
 group :development, :test do
+  gem 'chromedriver-helper'
   gem "rspec"
   gem "rspec-rails"
   gem "webrat"
@@ -58,10 +58,10 @@ group :development, :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
+  gem 'rspec-activemodel-mocks'
 end
 
 
-gem 'rspec-activemodel-mocks'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -71,3 +71,4 @@ gem 'rspec-activemodel-mocks'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
